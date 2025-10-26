@@ -2,6 +2,7 @@ package shaman
 
 import (
 	"github.com/wowsims/mop/sim/core"
+	"github.com/wowsims/mop/sim/core/stats"
 )
 
 func (shaman *Shaman) BloodlustActionID() core.ActionID {
@@ -61,5 +62,9 @@ func (shaman *Shaman) registerBloodlustCD() {
 		Spell:    spell,
 		Type:     core.CooldownTypeDPS,
 		Priority: core.CooldownPriorityBloodlust,
+		BuffAura: &core.StatBuffAura{
+			BuffedStatTypes: []stats.Stat{stats.HasteRating},
+			IsSwapped:       false,
+		},
 	})
 }
