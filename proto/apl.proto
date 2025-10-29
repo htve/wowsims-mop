@@ -99,7 +99,7 @@ message APLAction {
 }
 
 
-// NextIndex: 120
+// NextIndex: 123
 message APLValue {
 	UUID uuid = 85;
 
@@ -204,11 +204,13 @@ message APLValue {
         // Aggregate Aura set values
         APLValueAllTrinketStatProcsActive all_trinket_stat_procs_active = 78; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueAnyTrinketStatProcsActive any_trinket_stat_procs_active = 79; // TODO: Rename in MoP as it includes all item/effect procs
+		APLValueAnyTrinketStatProcsAvailable any_trinket_stat_procs_available = 120; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueTrinketProcsMinRemainingTime trinket_procs_min_remaining_time = 80; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueTrinketProcsMaxRemainingICD trinket_procs_max_remaining_icd = 82; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueNumEquippedStatProcTrinkets num_equipped_stat_proc_trinkets = 81; // TODO: Rename in MoP as it includes all item/effect procs
         APLValueNumStatBuffCooldowns num_stat_buff_cooldowns = 84;
         APLValueAnyStatBuffCooldownsActive any_stat_buff_cooldowns_active = 106;
+		APLValueAnyStatBuffCooldownsMinDuration any_stat_buff_cooldowns_min_duration = 121;
 
         // Dot values
         APLValueDotIsActive dot_is_active = 6;
@@ -221,6 +223,7 @@ message APLValue {
 		APLValueDotPercentIncrease dot_percent_increase = 101;
 		APLValueDotPercentIncrease dot_crit_percent_increase = 109;
         APLValueDotPercentIncrease dot_tick_rate_percent_increase = 110;
+		APLValueCurrentSnapshot dot_current_snapshot = 122;
 
         // Sequence values
         APLValueSequenceIsComplete sequence_is_complete = 44;
@@ -704,6 +707,12 @@ message APLValueAnyTrinketStatProcsActive {
     int32 stat_type3 = 3;
     double min_icd_seconds = 4;
 }
+message APLValueAnyTrinketStatProcsAvailable {
+    int32 stat_type1 = 1;
+    int32 stat_type2 = 2;
+    int32 stat_type3 = 3;
+    double min_icd_seconds = 4;
+}
 message APLValueTrinketProcsMinRemainingTime {
     int32 stat_type1 = 1;
     int32 stat_type2 = 2;
@@ -728,6 +737,11 @@ message APLValueNumStatBuffCooldowns {
     int32 stat_type3 = 3;
 }
 message APLValueAnyStatBuffCooldownsActive {
+    int32 stat_type1 = 1;
+    int32 stat_type2 = 2;
+    int32 stat_type3 = 3;
+}
+message APLValueAnyStatBuffCooldownsMinDuration {
     int32 stat_type1 = 1;
     int32 stat_type2 = 2;
     int32 stat_type3 = 3;
@@ -775,6 +789,9 @@ message APLValueWarlockHandOfGuldanInFlight {}
 message APLValueWarlockHauntInFlight {}
 message APLValueMageCurrentCombustionDotEstimate {}
 message APLValueShamanFireElementalDuration {}
+message APLValueAfflictionHauntDamageEstimate {}
+message APLValueAfflictionSBSSDamageEstimate {}
+message APLValueAfflictionDSDamageCost {}
 
 message APLValueMonkCurrentChi {}
 message APLValueMonkMaxChi {}
@@ -789,6 +806,12 @@ message APLValueDotPercentIncrease {
 	ActionID spell_id = 1;
 	UnitReference target_unit = 2;
 	bool use_base_value = 3;
+}
+
+message APLValueCurrentSnapshot {
+	ActionID spell_id = 1;
+	UnitReference target_unit = 2;
+	bool ignore_haste = 3;
 }
 
 message APLActionGroupReference {

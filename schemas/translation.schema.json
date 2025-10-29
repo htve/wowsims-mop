@@ -5865,6 +5865,22 @@
                     "tooltip"
                   ]
                 },
+				"any_trinket_stat_procs_available": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
                 "trinket_procs_min_remaining_time": {
                   "type": "object",
                   "properties": {
@@ -5930,6 +5946,22 @@
                   ]
                 },
                 "any_stat_buff_cooldowns_active": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
+				"any_stat_buff_cooldowns_min_duration": {
                   "type": "object",
                   "properties": {
                     "label": {
@@ -6042,6 +6074,22 @@
                   ]
                 },
                 "dot_percent_increase": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "tooltip": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "label",
+                    "tooltip"
+                  ]
+                },
+				"dot_current_snapshot": {
                   "type": "object",
                   "properties": {
                     "label": {
