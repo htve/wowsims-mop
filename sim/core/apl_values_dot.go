@@ -438,9 +438,7 @@ func (rot *APLRotation) newDotCurrentSnapshot(config *proto.APLValueCurrentSnaps
 func (value *APLValueCurrentSnapshot) Finalize(rot *APLRotation) {
 	if value.baseValueDummyAura != nil {
 		var sbssDotRefs []*Spell
-		//if rot.unit.character.Spec == proto.Spec_SpecAfflictionWarlock {
 		sbssDotRefs = []*Spell{rot.unit.GetSpell(ActionID{SpellID: 172}), rot.unit.GetSpell(ActionID{SpellID: 980}), rot.unit.GetSpell(ActionID{SpellID: 30108})}
-		//}
 		value.baseValueDummyAura.ApplyOnInit(func(aura *Aura, sim *Simulation) {
 			//check for soulburn: soulswap
 			if value.spell.ActionID.SpellID == 86121 && value.spell.ActionID.Tag == 1 {
@@ -484,11 +482,6 @@ func (value *APLValueCurrentSnapshot) GetFloat(sim *Simulation) float64 {
 		for _, spellRef := range sbssDotRefs {
 			dot := spellRef.Dot(target)
 
-			// fmt.Println(sim.CurrentTime,
-			// 	"id:", dot.Spell.ActionID.SpellID,
-			// 	"existing unhasted", dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target)*dot.tickPeriod.Seconds(),
-			// 	"existing hasted", dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target))
-
 			existingDamage += TernaryFloat64(value.ignoreHaste, dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target)*dot.tickPeriod.Seconds(), dot.Spell.ExpectedTickDamageFromCurrentSnapshot(sim, target))
 		}
 	} else {
@@ -501,12 +494,5 @@ func (value *APLValueCurrentSnapshot) GetFloat(sim *Simulation) float64 {
 	}
 
 	// Rounding this to effectively 3 decimal places as a percentage to avoid floating point errors
-
-	// fmt.Println(sim.CurrentTime,
-	// 	"total sbss",
-	// 	"base unhasted", value.baseValueUnhasted,
-	// 	"base hasted", value.baseValueHasted,
-	// 	"existing unhasted", existingDamage,
-	// 	math.Round((existingDamage/baseDamage)*100000)/100000-1)
 	return math.Round((existingDamage/baseDamage)*100000)/100000 - 1
 }

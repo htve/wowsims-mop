@@ -169,9 +169,6 @@ func (value *APLValueItemProcsMinRemainingTime) GetDuration(sim *Simulation) tim
 	for _, aura := range value.matchingAuras {
 		if aura.IsActive() {
 			minRemainingTime = min(minRemainingTime, aura.RemainingDuration(sim))
-			// if sim.CurrentTime < 10*time.Second && aura.ActionID.SpellID == 138963 {
-			// 	fmt.Println(sim.CurrentTime, "trinket active", aura.ActionID, "remaining:", aura.RemainingDuration(sim))
-			// }
 		}
 	}
 

@@ -789,9 +789,6 @@ message APLValueWarlockHandOfGuldanInFlight {}
 message APLValueWarlockHauntInFlight {}
 message APLValueMageCurrentCombustionDotEstimate {}
 message APLValueShamanFireElementalDuration {}
-message APLValueAfflictionHauntDamageEstimate {}
-message APLValueAfflictionSBSSDamageEstimate {}
-message APLValueAfflictionDSDamageCost {}
 
 message APLValueMonkCurrentChi {}
 message APLValueMonkMaxChi {}
