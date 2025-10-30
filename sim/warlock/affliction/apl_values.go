@@ -17,7 +17,7 @@ func (warlock *AfflictionWarlock) NewAPLValue(rot *core.APLRotation, config *pro
 		}
 		return rot.NewValueSpellInFlight(&spellInFlight, nil)
 	case *proto.APLValue_DotCurrentSnapshot:
-		return warlock.newDotCurrentSnapshot(config.GetDotCurrentSnapshot(), config.Uuid)
+		return warlock.newDotCurrentSnapshot(rot, config.GetDotCurrentSnapshot(), config.Uuid)
 	default:
 		return warlock.Warlock.NewAPLValue(rot, config)
 	}
@@ -100,14 +100,14 @@ type APLValueCurrentSnapshot struct {
 	baseValueDummyAura *core.Aura // Used to get the base value at encounter start
 }
 
-func (warlock *AfflictionWarlock) newDotCurrentSnapshot(config *proto.APLValueCurrentSnapshot, _ *proto.UUID) *APLValueCurrentSnapshot {
+func (warlock *AfflictionWarlock) newDotCurrentSnapshot(rot *core.APLRotation, config *proto.APLValueCurrentSnapshot, _ *proto.UUID) *APLValueCurrentSnapshot {
 	spell := warlock.GetSpell(core.ActionID{SpellID: config.SpellId.GetSpellId()})
 	if spell == nil {
 		return nil
 	}
 
 	//targetRef := core.NewUnitReference(config.TargetUnit, &warlock.Unit)
-	targetRef := warlock.Rotation.GetTargetUnit(config.TargetUnit)
+	targetRef := rot.GetTargetUnit(config.TargetUnit)
 
 	baseValueDummyAura := core.MakePermanent(warlock.GetOrRegisterAura(core.Aura{
 		Label:    "Dummy Aura - APL Current Snapshot Base Value",
@@ -138,7 +138,6 @@ func (value *APLValueCurrentSnapshot) Finalize(rot *core.APLRotation) {
 
 			} else {
 				target := value.targetRef.Get()
-				fmt.Println("found target:", target)
 				value.baseValue = value.spell.ExpectedTickDamage(sim, target) * value.spell.Dot(target).CalcTickPeriod().Seconds()
 				value.baseValue /= (1 + (value.spell.SpellCritChance(target) * (value.spell.CritDamageMultiplier() - 1)))
 			}
