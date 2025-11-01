@@ -394,6 +394,17 @@ message StatCapConfig {
 // caps, and is therefore not versioned, since this message is not imported or
 // exported from local storage or links.
 message UIStat {
+	// Proto version at the time these stats were saved. If you make any
+	// breaking changes to the size, ordering, or interpretation of the
+	// stats or pseudoStats arrays, then make sure to increment the
+	// current_version_number option in the ProtoVersion message at the top
+	// of this file.
+	// A "breaking change" here is defined as anything that will break saved
+	// browser data or old sim links; the version need not be incremented if
+	// you simply append a new rarely-used PseudoStat to the end of the
+	// array, for example.
+	int32 api_version = 3;
+
 	// Uniquely identifies the attribute
 	oneof unit_stat {
 		Stat stat = 1;

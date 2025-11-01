@@ -397,10 +397,8 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			const savedSettings = window.localStorage.getItem(this.getSettingsStorageKey());
 			if (savedSettings != null) {
 				try {
-					const settingsProto = IndividualSimSettings.fromJsonString(savedSettings, { ignoreUnknownFields: true });
-					IndividualSimUI.updateProtoVersion(settingsProto);
-
-					this.fromProto(initEventID, settingsProto);
+					const settings = IndividualSimSettings.fromJsonString(savedSettings, { ignoreUnknownFields: true });
+					this.fromProto(initEventID, settings);
 				} catch (e) {
 					console.warn('Failed to parse saved settings: ' + e);
 				}
@@ -540,7 +538,7 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 			[
 				1,
 				(oldProto: IndividualSimSettings) => {
-					oldProto.apiVersion = 1;
+					oldProto.apiVersion = 2;
 
 					oldProto.reforgeSettings = ReforgeSettings.create({
 						useCustomEpValues: oldProto.settings?.useCustomEpValues,
@@ -682,6 +680,8 @@ export abstract class IndividualSimUI<SpecType extends Spec> extends SimUI {
 		const healingSpec = this.player.getPlayerSpec().isHealingSpec;
 
 		TypedEvent.freezeAllAndDo(() => {
+			IndividualSimUI.updateProtoVersion(settings);
+
 			if (!settings.player) {
 				return;
 			}

@@ -554,6 +554,10 @@ export class Player<SpecType extends Spec> {
 		this.epRatiosChangeEmitter.emit(eventID);
 	}
 
+	hasCustomEPWeights(): boolean {
+		return !this.getSpecConfig().presets.epWeights.some(epw => epw.epWeights.equals(this.epWeights));
+	}
+
 	async computeStatWeights(
 		_eventID: EventID,
 		epStats: Array<Stat>,

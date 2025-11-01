@@ -367,6 +367,12 @@ export class ReforgeOptimizer {
 			],
 			'ReforgeSettingsChange',
 		);
+
+		TypedEvent.onAny([this.useCustomEPValuesChangeEmitter, this.player.epWeightsChangeEmitter, this.statCapsChangeEmitter]).on(eventID => {
+			if (this.useCustomEPValues && (this.player.hasCustomEPWeights() || !this._statCaps.equals(this.defaults.statCaps || new Stats()))) {
+				this.setUseSoftCapBreakpoints(eventID, false);
+			}
+		});
 	}
 
 	private bindToggleExperimental(element: Element) {
@@ -405,7 +411,7 @@ export class ReforgeOptimizer {
 		if (!this.useCustomEPValues) {
 			if (this.getEPDefaults) {
 				weights = this.getEPDefaults?.(this.player);
-			} else if (!this.player.getSpecConfig().presets.epWeights.some(epw => epw.epWeights.equals(weights))) {
+			} else if (!this.player.hasCustomEPWeights()) {
 				weights = this.defaults.epWeights;
 			}
 		}
