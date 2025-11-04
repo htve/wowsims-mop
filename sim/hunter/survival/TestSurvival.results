@@ -61,8 +61,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 177169.88807
-  tps: 143195.68262
+  dps: 176939.6619
+  tps: 143019.31912
  }
 }
 dps_results: {
@@ -677,14 +677,14 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 162266.23279
-  tps: 133741.46091
+  dps: 162270.22617
+  tps: 133743.19088
  }
 }
 dps_results: {
  key: "TestSurvival-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 162277.25296
+  dps: 162270.22617
   tps: 133743.19088
  }
 }
@@ -796,8 +796,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 166158.51189
-  tps: 136780.49731
+  dps: 166075.68498
+  tps: 136704.6041
  }
 }
 dps_results: {
@@ -1713,8 +1713,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 162277.25296
-  tps: 133743.19088
+  dps: 179983.34529
+  tps: 147174.18648
  }
 }
 dps_results: {
@@ -1748,8 +1748,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 178807.96564
-  tps: 147392.23238
+  dps: 178341.56039
+  tps: 146980.29473
  }
 }
 dps_results: {
@@ -1860,7 +1860,7 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 164658.02965
+  dps: 164656.42412
   tps: 134949.1007
  }
 }
@@ -2028,8 +2028,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 177015.51093
-  tps: 144967.63911
+  dps: 176577.1354
+  tps: 144645.06177
  }
 }
 dps_results: {
@@ -2329,7 +2329,7 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 162277.25296
+  dps: 162270.22617
   tps: 133743.19088
  }
 }

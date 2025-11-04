@@ -65,8 +65,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 166697.14526
-  tps: 153444.36354
+  dps: 166724.74494
+  tps: 153471.69299
   hps: 1723.92544
  }
 }
@@ -769,16 +769,16 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 174813.08275
-  tps: 160729.14986
-  hps: 1704.5857
+  dps: 175226.1621
+  tps: 161095.56304
+  hps: 1702.16823
  }
 }
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 168730.77831
-  tps: 155394.17588
+  dps: 182266.92303
+  tps: 166807.94694
   hps: 1778.67626
  }
 }
@@ -905,9 +905,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 179447.30047
-  tps: 164729.28453
-  hps: 1763.35918
+  dps: 179124.47051
+  tps: 164426.45364
+  hps: 1768.48421
  }
 }
 dps_results: {
@@ -1879,8 +1879,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 179127.57906
-  tps: 164534.6275
+  dps: 180523.78271
+  tps: 165715.54097
   hps: 1761.37685
  }
 }
@@ -1967,8 +1967,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 166617.19559
-  tps: 153403.83833
+  dps: 166829.89088
+  tps: 153564.68626
   hps: 1723.92544
  }
 }
@@ -2184,8 +2184,8 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 178381.03895
-  tps: 164356.56437
+  dps: 178053.06179
+  tps: 164010.10324
   hps: 1755.35252
  }
 }
@@ -2376,9 +2376,9 @@ dps_results: {
 dps_results: {
  key: "TestFrostMasterfrost-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 169323.56694
-  tps: 155593.81446
-  hps: 1776.97436
+  dps: 169213.42054
+  tps: 155590.88753
+  hps: 1769.00638
  }
 }
 dps_results: {

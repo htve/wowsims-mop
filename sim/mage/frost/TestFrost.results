@@ -40,7 +40,7 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-AssuranceofConsequence-105472"
  value: {
-  dps: 152272.14981
+  dps: 152273.26451
   tps: 105457.64668
  }
 }
@@ -173,14 +173,14 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-EvilEyeofGalakras-105491"
  value: {
-  dps: 152267.40294
+  dps: 152263.09732
   tps: 105457.64668
  }
 }
 dps_results: {
  key: "TestFrost-AllItems-FabledFeatherofJi-Kun-96842"
  value: {
-  dps: 152273.26451
+  dps: 152269.67702
   tps: 105457.64668
  }
 }
@@ -208,8 +208,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-GazeoftheTwins-96915"
  value: {
-  dps: 155070.13884
-  tps: 107383.5032
+  dps: 155456.19731
+  tps: 107661.41684
  }
 }
 dps_results: {
@@ -292,15 +292,15 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-Primordius'TalismanofRage-96873"
  value: {
-  dps: 156636.42912
+  dps: 156635.95049
   tps: 108587.47184
  }
 }
 dps_results: {
  key: "TestFrost-AllItems-PurifiedBindingsofImmerseus-105422"
  value: {
-  dps: 179024.47833
-  tps: 123556.52987
+  dps: 178663.70549
+  tps: 123312.53431
  }
 }
 dps_results: {
@@ -334,8 +334,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-Renataki'sSoulCharm-96741"
  value: {
-  dps: 152273.26451
-  tps: 105457.64668
+  dps: 152260.95776
+  tps: 105462.11973
  }
 }
 dps_results: {
@@ -383,7 +383,7 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-SparkofZandalar-96770"
  value: {
-  dps: 155386.92847
+  dps: 155388.8792
   tps: 107616.66987
  }
 }
@@ -397,8 +397,8 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-TalismanofBloodlust-96864"
  value: {
-  dps: 156410.09742
-  tps: 108489.15425
+  dps: 156008.18283
+  tps: 108255.21589
  }
 }
 dps_results: {
@@ -418,15 +418,15 @@ dps_results: {
 dps_results: {
  key: "TestFrost-AllItems-UnerringVisionofLeiShen-96930"
  value: {
-  dps: 163249.83364
-  tps: 113113.9925
+  dps: 170106.14742
+  tps: 116676.00837
  }
 }
 dps_results: {
  key: "TestFrost-AllItems-Wushoolay'sFinalChoice-96785"
  value: {
-  dps: 152273.26451
-  tps: 105457.64668
+  dps: 170666.25174
+  tps: 118005.32368
  }
 }
 dps_results: {
