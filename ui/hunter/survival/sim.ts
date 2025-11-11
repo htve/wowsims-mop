@@ -22,6 +22,15 @@ const SPEC_CONFIG = registerSpecConfig(Spec.SpecSurvivalHunter, {
 	warnings: [],
 	// All stats for which EP should be calculated.
 	epStats: [
+		Stat.StatAgility,
+		Stat.StatRangedAttackPower,
+		Stat.StatHitRating,
+		Stat.StatCritRating,
+		Stat.StatHasteRating,
+		Stat.StatMasteryRating,
+		Stat.StatExpertiseRating,
+	],
+	gemStats: [
 		Stat.StatStamina,
 		Stat.StatAgility,
 		Stat.StatRangedAttackPower,
