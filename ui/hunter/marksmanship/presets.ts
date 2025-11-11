@@ -84,7 +84,6 @@ export const DefaultConsumables = ConsumesSpec.create({
 	foodId: 74648, // Seafood Magnifique Feast
 	potId: 76089, // Potion of the Tol'vir
 	prepotId: 76089, // Potion of the Tol'vir
-	conjuredId: 5512, // Conjured Healthstone
 });
 export const OtherDefaults = {
 	distanceFromTarget: 24,
