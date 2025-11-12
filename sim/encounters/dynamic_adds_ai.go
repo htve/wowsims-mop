@@ -18,8 +18,8 @@ func addDynamicAddsAI() {
 }
 
 func createDynamicAddsAIPreset() {
-	bossName := "Dynamic Boss 25"
-	addName := "Dynamic Add 25"
+	bossName := "Dynamic Boss"
+	addName := "Dynamic Add"
 
 	core.AddPresetTarget(&core.PresetTarget{
 		PathPrefix: "Default",
@@ -38,8 +38,8 @@ func createDynamicAddsAIPreset() {
 
 			SpellSchool:   proto.SpellSchool_SpellSchoolPhysical,
 			SwingSpeed:    2.0,
-			MinBaseDamage: 50000,
-			DamageSpread:  0.1,
+			MinBaseDamage: 900000,
+			DamageSpread:  0.5,
 			TargetInputs:  dynamicAddsTargetInputs(),
 		},
 
@@ -63,15 +63,15 @@ func createDynamicAddsAIPreset() {
 
 			SpellSchool:   proto.SpellSchool_SpellSchoolPhysical,
 			SwingSpeed:    1.5,
-			MinBaseDamage: 25000,
-			DamageSpread:  0.2,
+			MinBaseDamage: 300000,
+			DamageSpread:  0.4,
 			TargetInputs:  []*proto.TargetInput{},
 		},
 
 		AI: makeDynamicAddsAI(false),
 	})
 
-	core.AddPresetEncounter(bossName+" Dynamic", []string{
+	core.AddPresetEncounter("Dynamic", []string{
 		"Default/" + bossName,
 		"Default/" + addName,
 	})
@@ -111,18 +111,19 @@ func makeDynamicAddsAI(isBoss bool) core.AIFactory {
 type DynamicAddsAI struct {
 	Target     *core.Target
 	BossUnit   *core.Unit
-	AddTargets []*core.Target
+	AddUnits   []*core.Unit
 	MainTank   *core.Unit
 	OffTank    *core.Unit
 	ValidTanks []*core.Unit
 
+	// Static parameters associated with a given preset
 	isBoss bool
 
 	spawnInterval time.Duration
 	addLifetime   time.Duration
 	spawnDelay    time.Duration
 
-	activeAdds    map[*core.Target]bool
+	activeAdds    map[*core.Unit]bool
 	nextSpawnTime time.Duration
 }
 
@@ -132,9 +133,9 @@ func (ai *DynamicAddsAI) Initialize(target *core.Target, config *proto.Target) {
 
 	if ai.isBoss {
 		ai.BossUnit = &target.Unit
-		for _, encounterTarget := range target.Env.Encounter.AllTargets {
-			if encounterTarget != target {
-				ai.AddTargets = append(ai.AddTargets, encounterTarget)
+		for _, encounterTarget := range target.Env.Encounter.AllTargetUnits {
+			if encounterTarget != &target.Unit {
+				ai.AddUnits = append(ai.AddUnits, encounterTarget)
 			}
 		}
 	} else {
@@ -151,8 +152,8 @@ func (ai *DynamicAddsAI) Initialize(target *core.Target, config *proto.Target) {
 	if ai.BossUnit != nil {
 		ai.MainTank = ai.BossUnit.CurrentTarget
 	}
-	if len(ai.AddTargets) > 0 {
-		ai.OffTank = ai.AddTargets[0].CurrentTarget
+	if len(ai.AddUnits) > 0 {
+		ai.OffTank = ai.AddUnits[0].CurrentTarget
 	}
 
 	ai.ValidTanks = core.FilterSlice([]*core.Unit{ai.MainTank, ai.OffTank}, func(unit *core.Unit) bool {
@@ -165,7 +166,7 @@ func (ai *DynamicAddsAI) Initialize(target *core.Target, config *proto.Target) {
 		ai.spawnDelay = core.DurationFromSeconds(config.TargetInputs[2].NumberValue)
 	}
 
-	ai.activeAdds = make(map[*core.Target]bool)
+	ai.activeAdds = make(map[*core.Unit]bool)
 }
 
 func (ai *DynamicAddsAI) Reset(sim *core.Simulation) {
@@ -176,11 +177,11 @@ func (ai *DynamicAddsAI) Reset(sim *core.Simulation) {
 		return
 	}
 
-	ai.activeAdds = make(map[*core.Target]bool)
+	ai.activeAdds = make(map[*core.Unit]bool)
 	ai.nextSpawnTime = ai.spawnDelay
 
-	for _, addTarget := range ai.AddTargets {
-		addTarget.Disable(sim, true)
+	for _, addTarget := range ai.AddUnits {
+		sim.DisableTargetUnit(addTarget, true)
 	}
 
 	if ai.spawnDelay > 0 {
@@ -190,21 +191,22 @@ func (ai *DynamicAddsAI) Reset(sim *core.Simulation) {
 		pa.OnAction = func(sim *core.Simulation) {
 			ai.spawnAdd(sim)
 		}
+		sim.AddPendingAction(pa)
 	} else {
 		ai.spawnAdd(sim)
 	}
 }
 
 func (ai *DynamicAddsAI) spawnAdd(sim *core.Simulation) {
-	var addTarget *core.Target
-	for _, target := range ai.AddTargets {
+	var addUnit *core.Unit
+	for _, target := range ai.AddUnits {
 		if !ai.activeAdds[target] {
-			addTarget = target
+			addUnit = target
 			break
 		}
 	}
 
-	if addTarget == nil {
+	if addUnit == nil {
 		ai.nextSpawnTime += ai.spawnInterval
 
 		pa := sim.GetConsumedPendingActionFromPool()
@@ -217,19 +219,19 @@ func (ai *DynamicAddsAI) spawnAdd(sim *core.Simulation) {
 		return
 	}
 
-	addTarget.Enable(sim)
-	ai.activeAdds[addTarget] = true
+	sim.EnableTargetUnit(addUnit)
+	ai.activeAdds[addUnit] = true
 
 	if sim.Log != nil {
 		sim.Log("Spawned add (%s) at %s. Current Active adds: %d",
-			addTarget.Label, sim.CurrentTime, len(ai.activeAdds))
+			addUnit.Label, sim.CurrentTime, len(ai.activeAdds))
 	}
 
 	pa := sim.GetConsumedPendingActionFromPool()
 	pa.NextActionAt = sim.CurrentTime + ai.addLifetime
 	pa.Priority = core.ActionPriorityDOT
 	pa.OnAction = func(sim *core.Simulation) {
-		ai.despawnAdd(sim, addTarget)
+		ai.despawnAdd(sim, addUnit)
 	}
 	sim.AddPendingAction(pa)
 
@@ -244,13 +246,13 @@ func (ai *DynamicAddsAI) spawnAdd(sim *core.Simulation) {
 	sim.AddPendingAction(pa)
 }
 
-func (ai *DynamicAddsAI) despawnAdd(sim *core.Simulation, addTarget *core.Target) {
-	addTarget.Disable(sim, true)
-	delete(ai.activeAdds, addTarget)
+func (ai *DynamicAddsAI) despawnAdd(sim *core.Simulation, addUnit *core.Unit) {
+	sim.DisableTargetUnit(addUnit, true)
+	delete(ai.activeAdds, addUnit)
 
 	if sim.Log != nil {
 		sim.Log("Despawned add %s at %s. Currently Active Adds: %d",
-			addTarget.Label, sim.CurrentTime, len(ai.activeAdds))
+			addUnit.Label, sim.CurrentTime, len(ai.activeAdds))
 	}
 }
 
