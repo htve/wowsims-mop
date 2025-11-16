@@ -52,12 +52,12 @@ func createDynamicAddsAIPreset() {
 		Config: &proto.Target{
 			Id:        dynamicAddID,
 			Name:      addName,
-			Level:     93,
+			Level:     92,
 			MobType:   proto.MobType_MobTypeMechanical,
 			TankIndex: 1,
 
 			Stats: stats.Stats{
-				stats.Armor:       24835,
+				stats.Armor:       23115,
 				stats.AttackPower: 0,
 			}.ToProtoArray(),
 
@@ -71,7 +71,7 @@ func createDynamicAddsAIPreset() {
 		AI: makeDynamicAddsAI(false),
 	})
 
-	core.AddPresetEncounter("Dynamic", []string{
+	core.AddPresetEncounter("Dynamic Adds", []string{
 		"Default/" + bossName,
 		"Default/" + addName,
 	})
@@ -83,7 +83,7 @@ func dynamicAddsTargetInputs() []*proto.TargetInput {
 			Label:       "Add(s) respawn Time",
 			Tooltip:     "Time for add(s) to respawn after previous died (in seconds)",
 			InputType:   proto.InputType_Number,
-			NumberValue: 30,
+			NumberValue: 10,
 		},
 		{
 			Label:       "Add(s) lifetime",
@@ -121,38 +121,17 @@ type DynamicAddsAI struct {
 	respawnTime time.Duration
 	addLifetime time.Duration
 	spawnDelay  time.Duration
-
-	nextSpawnTime time.Duration
 }
 
 func (ai *DynamicAddsAI) Initialize(target *core.Target, config *proto.Target) {
 	ai.Target = target
 	ai.Target.AutoAttacks.MHConfig().ActionID.Tag = core.TernaryInt32(ai.isBoss, dynamicBossID, dynamicAddID)
 
-	if ai.isBoss {
-		ai.BossUnit = &target.Unit
-		for _, encounterTarget := range target.Env.Encounter.AllTargetUnits {
-			if encounterTarget != &target.Unit {
-				ai.AddUnits = append(ai.AddUnits, encounterTarget)
-			}
-		}
-	} else {
-		for _, encounterTarget := range target.Env.Encounter.AllTargets {
-			if encounterTarget.AI != nil {
-				if bossAI, ok := encounterTarget.AI.(*DynamicAddsAI); ok && bossAI.isBoss {
-					ai.BossUnit = &encounterTarget.Unit
-					break
-				}
-			}
-		}
-	}
+	ai.BossUnit = target.Env.Encounter.AllTargetUnits[0]
+	ai.AddUnits = target.Env.Encounter.AllTargetUnits[1:]
 
-	if ai.BossUnit != nil {
-		ai.MainTank = ai.BossUnit.CurrentTarget
-	}
-	if len(ai.AddUnits) > 0 {
-		ai.OffTank = ai.AddUnits[0].CurrentTarget
-	}
+	ai.MainTank = ai.BossUnit.CurrentTarget
+	ai.OffTank = ai.AddUnits[0].CurrentTarget
 
 	if ai.isBoss && len(config.TargetInputs) >= 3 {
 		ai.addLifetime = core.DurationFromSeconds(config.TargetInputs[1].NumberValue)
@@ -162,14 +141,11 @@ func (ai *DynamicAddsAI) Initialize(target *core.Target, config *proto.Target) {
 }
 
 func (ai *DynamicAddsAI) Reset(sim *core.Simulation) {
-	ai.Target.ExtendGCDUntil(sim, core.DurationFromSeconds(sim.RandomFloat("Specials Timing")*core.BossGCD.Seconds()))
 	ai.Target.AutoAttacks.RandomizeMeleeTiming(sim)
 
 	if !ai.isBoss {
 		return
 	}
-
-	ai.nextSpawnTime = ai.spawnDelay
 
 	for _, addTarget := range ai.AddUnits {
 		sim.DisableTargetUnit(addTarget, true)
@@ -197,7 +173,6 @@ func (ai *DynamicAddsAI) spawnAdds(sim *core.Simulation) {
 		sim.Log("Spawned %d adds at %s.", len(ai.AddUnits), sim.CurrentTime)
 	}
 
-	ai.nextSpawnTime += ai.addLifetime + ai.respawnTime
 	pa := sim.GetConsumedPendingActionFromPool()
 	pa.NextActionAt = sim.CurrentTime + ai.addLifetime
 	pa.Priority = core.ActionPriorityDOT
@@ -219,7 +194,7 @@ func (ai *DynamicAddsAI) despawnAdds(sim *core.Simulation) {
 	// Only schedule next spawn if there is a respawn time
 	if ai.respawnTime > 0 {
 		pa := sim.GetConsumedPendingActionFromPool()
-		pa.NextActionAt = ai.nextSpawnTime
+		pa.NextActionAt = sim.CurrentTime + ai.respawnTime
 		pa.Priority = core.ActionPriorityDOT
 		pa.OnAction = func(sim *core.Simulation) {
 			ai.spawnAdds(sim)
