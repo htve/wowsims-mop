@@ -1282,6 +1282,15 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestProtection-AllItems-Haromm'sTalisman-105527"
+ value: {
+  dps: 121010.60962
+  tps: 795538.31743
+  dtps: 13684.70852
+  hps: 19246.09187
+ }
+}
+dps_results: {
  key: "TestProtection-AllItems-Hawkmaster'sTalon-89082"
  value: {
   dps: 115004.04348
@@ -1513,6 +1522,15 @@ dps_results: {
   tps: 750533.66676
   dtps: 13861.41804
   hps: 19121.63364
+ }
+}
+dps_results: {
+ key: "TestProtection-AllItems-Kardris'ToxicTotem-105540"
+ value: {
+  dps: 121418.16767
+  tps: 797386.67787
+  dtps: 13618.11799
+  hps: 19270.89426
  }
 }
 dps_results: {
@@ -2238,10 +2256,10 @@ dps_results: {
 dps_results: {
  key: "TestProtection-AllItems-RuneofRe-Origination-96918"
  value: {
-  dps: 112882.32414
-  tps: 741043.28608
-  dtps: 13729.90834
-  hps: 18459.21729
+  dps: 115478.76114
+  tps: 755607.6138
+  dtps: 13803.48234
+  hps: 19449.0362
  }
 }
 dps_results: {
