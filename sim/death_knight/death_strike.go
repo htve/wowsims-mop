@@ -50,27 +50,10 @@ func (dk *DeathKnight) registerDeathStrike() {
 		ThreatMultiplier: 0,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			healValue := damageTakenInFive * dk.deathStrikeHealingMultiplier
-			healValueModed := spell.CalcHealing(sim, target, healValue, spell.OutcomeHealingNoHitCounter).Damage
-
-			minHeal := spell.Unit.MaxHealth() * 0.07
-
-			flags := spell.Flags
-			healing := healValue
-			if healValueModed < minHeal {
-				// Remove caster modifiers for spell when doing min heal
-				spell.Flags |= core.SpellFlagIgnoreAttackerModifiers
-				healing = minHeal
-
-				// Scent of Blood healing modifier is applied to the min heal
-				// This **should** also be the only thing modifying the DamageMultiplier of this spell
-				healing *= spell.DamageMultiplier
-			}
+			healing := max(spell.Unit.MaxHealth()*0.07, damageTakenInFive*dk.deathStrikeHealingMultiplier)
+			healing += spell.MeleeAttackPower() * 0.02
 
 			spell.CalcAndDealHealing(sim, target, healing, spell.OutcomeHealing)
-
-			// Add back caster modifiers
-			spell.Flags = flags
 		},
 	})
 
