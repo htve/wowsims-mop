@@ -24,9 +24,9 @@ func (dk *DeathKnight) registerDeathStrike() {
 			if result.Landed() {
 				damageTaken := result.Damage
 				damageTakenInFive += damageTaken
-				pa := sim.GetConsumedPendingActionFromPool()
-				pa.NextActionAt = sim.CurrentTime + time.Second*5
 
+				pa := sim.GetConsumedPendingActionFromPool()
+				pa.NextActionAt = sim.CurrentTime.Truncate(time.Second) + time.Second*5
 				pa.OnAction = func(_ *core.Simulation) {
 					damageTakenInFive -= damageTaken
 				}
@@ -50,9 +50,8 @@ func (dk *DeathKnight) registerDeathStrike() {
 		ThreatMultiplier: 0,
 
 		ApplyEffects: func(sim *core.Simulation, target *core.Unit, spell *core.Spell) {
-			healing := max(spell.Unit.MaxHealth()*0.07, damageTakenInFive*dk.deathStrikeHealingMultiplier)
-			healing += spell.MeleeAttackPower() * 0.02
-
+			maxHealth := spell.Unit.MaxHealth()
+			healing := min(max(maxHealth*0.07, damageTakenInFive*dk.deathStrikeHealingMultiplier), maxHealth*0.35)
 			spell.CalcAndDealHealing(sim, target, healing, spell.OutcomeHealing)
 		},
 	})
