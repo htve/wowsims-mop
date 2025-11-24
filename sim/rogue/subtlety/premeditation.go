@@ -19,7 +19,12 @@ func (subRogue *SubtletyRogue) registerPremeditation() {
 			shouldTimeout = true
 		},
 		OnCastComplete: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell) {
-			if spell.Flags.Matches(rogue.SpellFlagFinisher) {
+			if spell.Flags.Matches(rogue.SpellFlagFinisher) && spell.ClassSpellMask == rogue.RogueSpellSliceAndDice {
+				shouldTimeout = false
+			}
+		},
+		OnSpellHitDealt: func(aura *core.Aura, sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
+			if spell.Flags.Matches(rogue.SpellFlagFinisher) && result.Landed() {
 				shouldTimeout = false
 			}
 		},
