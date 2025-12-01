@@ -38,7 +38,6 @@ type Mage struct {
 	Icicle               *core.Spell
 
 	AlterTimeAura        *core.Aura
-	IncantersWardPassive *core.Aura
 	InvocationAura       *core.Aura
 	RuneOfPowerAura      *core.Aura
 	PresenceOfMindAura   *core.Aura

@@ -217,7 +217,7 @@ func (mage *Mage) registerIncantersWard() {
 		return
 	}
 
-	mage.IncantersWardPassive = core.MakePermanent(mage.RegisterAura(core.Aura{
+	core.MakePermanent(mage.RegisterAura(core.Aura{
 		Label:    "Incanter's Ward Passive",
 		ActionID: core.ActionID{SpellID: 1463},
 		OnGain: func(aura *core.Aura, sim *core.Simulation) {
