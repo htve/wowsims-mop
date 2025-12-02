@@ -152,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestSurvival-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 180124.27052
-  tps: 148855.23487
+  dps: 182148.66302
+  tps: 150879.62737
  }
 }
 dps_results: {

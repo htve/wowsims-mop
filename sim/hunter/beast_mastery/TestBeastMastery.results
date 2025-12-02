@@ -152,8 +152,8 @@ dps_results: {
 dps_results: {
  key: "TestBeastMastery-AllItems-CapacitivePrimalDiamond"
  value: {
-  dps: 177413.51485
-  tps: 85971.76801
+  dps: 179481.71724
+  tps: 88039.9704
  }
 }
 dps_results: {
