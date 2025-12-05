@@ -542,7 +542,7 @@ func (unit *Unit) TotalMeleeHasteMultiplier() float64 {
 	return unit.PseudoStats.AttackSpeedMultiplier * unit.PseudoStats.MeleeSpeedMultiplier * (1 + (unit.stats[stats.HasteRating] / (HasteRatingPerHastePercent * 100)))
 }
 
-// Returns the melee haste multiplier only including equip haste and real haste modifiers like lust
+// Returns the real haste multiplier only including equip haste and real haste modifiers like lust
 // Same value for ranged and melee
 // Real Haste mods:
 // MELEE_SLOW
