@@ -555,6 +555,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['logic'],
 		shortDescription: i18n.t('rotation_tab.apl.values.compare.tooltip'),
 		newValue: APLValueCompare.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [valueFieldConfig('lhs'), comparisonOperatorFieldConfig('op'), valueFieldConfig('rhs')],
 	}),
 	math: inputBuilder({
@@ -583,6 +584,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['logic'],
 		shortDescription: i18n.t('rotation_tab.apl.values.all_of.tooltip'),
 		newValue: APLValueAnd.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [valueListFieldConfig('vals')],
 	}),
 	or: inputBuilder({
@@ -590,6 +592,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['logic'],
 		shortDescription: i18n.t('rotation_tab.apl.values.any_of.tooltip'),
 		newValue: APLValueOr.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [valueListFieldConfig('vals')],
 	}),
 	not: inputBuilder({
@@ -597,6 +600,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['logic'],
 		shortDescription: i18n.t('rotation_tab.apl.values.not.tooltip'),
 		newValue: APLValueNot.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [valueFieldConfig('val')],
 	}),
 
@@ -606,6 +610,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_time.tooltip'),
 		newValue: APLValueCurrentTime.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	currentTimePercent: inputBuilder({
@@ -613,6 +618,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_time_percent.tooltip'),
 		newValue: APLValueCurrentTimePercent.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	remainingTime: inputBuilder({
@@ -620,6 +626,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.remaining_time.tooltip'),
 		newValue: APLValueRemainingTime.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	remainingTimePercent: inputBuilder({
@@ -627,6 +634,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.remaining_time_percent.tooltip'),
 		newValue: APLValueRemainingTimePercent.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	isExecutePhase: inputBuilder({
@@ -634,6 +642,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.is_execute_phase.tooltip'),
 		newValue: APLValueIsExecutePhase.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [executePhaseThresholdFieldConfig('threshold')],
 	}),
 	numberTargets: inputBuilder({
@@ -641,6 +650,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.num_targets.tooltip'),
 		newValue: APLValueNumberTargets.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	frontOfTarget: inputBuilder({
@@ -648,6 +658,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['encounter'],
 		shortDescription: i18n.t('rotation_tab.apl.values.in_front_of_target.tooltip'),
 		newValue: APLValueFrontOfTarget.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 
@@ -657,6 +668,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['boss'],
 		shortDescription: i18n.t('rotation_tab.apl.values.spell_is_casting.tooltip'),
 		newValue: APLValueBossSpellIsCasting.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
 			AplHelpers.actionIdFieldConfig('spellId', 'non_instant_spells', 'targetUnit', 'currentTarget'),
@@ -667,6 +679,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['boss'],
 		shortDescription: i18n.t('rotation_tab.apl.values.spell_time_to_ready.tooltip'),
 		newValue: APLValueBossSpellTimeToReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'spells', 'targetUnit', 'currentTarget')],
 	}),
 	bossCurrentTarget: inputBuilder({
@@ -674,6 +687,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['boss'],
 		shortDescription: i18n.t('rotation_tab.apl.values.boss_current_target.tooltip'),
 		newValue: APLValueBossCurrentTarget.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets')],
 	}),
 
@@ -683,6 +697,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['unit'],
 		shortDescription: i18n.t('rotation_tab.apl.values.unit_is_moving.tooltip'),
 		newValue: APLValueUnitIsMoving.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	unitDistance: inputBuilder({
@@ -699,6 +714,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'health'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_health.tooltip'),
 		newValue: APLValueCurrentHealth.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	currentHealthPercent: inputBuilder({
@@ -706,6 +722,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'health'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_health_percent.tooltip'),
 		newValue: APLValueCurrentHealthPercent.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources')],
 	}),
 	maxHealth: inputBuilder({
@@ -713,6 +730,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'health'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_health.tooltip'),
 		newValue: APLValueMaxHealth.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	currentMana: inputBuilder({
@@ -720,9 +738,9 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'mana'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_mana.tooltip'),
 		newValue: APLValueCurrentMana.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
-			return clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
+			return !isPrepull && clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
 		},
 		fields: [],
 	}),
@@ -731,9 +749,9 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'mana'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_mana_percent.tooltip'),
 		newValue: APLValueCurrentManaPercent.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
-			return clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
+			return !isPrepull && clss !== Class.ClassDeathKnight && clss !== Class.ClassHunter && clss !== Class.ClassRogue && clss !== Class.ClassWarrior;
 		},
 		fields: [],
 	}),
@@ -742,10 +760,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'rage'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_rage.tooltip'),
 		newValue: APLValueCurrentRage.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassWarrior;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassWarrior);
 		},
 		fields: [],
 	}),
@@ -754,10 +772,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'rage'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_rage.tooltip'),
 		newValue: APLValueMaxRage.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassWarrior;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassWarrior);
 		},
 		fields: [],
 	}),
@@ -766,7 +784,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'focus'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_focus.tooltip'),
 		newValue: APLValueCurrentFocus.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassHunter,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassHunter,
 		fields: [],
 	}),
 	maxFocus: inputBuilder({
@@ -774,7 +792,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'focus'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_focus.tooltip'),
 		newValue: APLValueMaxFocus.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassHunter,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassHunter,
 		fields: [],
 	}),
 	focusRegenPerSecond: inputBuilder({
@@ -782,7 +800,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'focus'],
 		shortDescription: i18n.t('rotation_tab.apl.values.focus_regen_per_second.tooltip'),
 		newValue: APLValueFocusRegenPerSecond.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassHunter,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassHunter,
 		fields: [],
 	}),
 	focusTimeToTarget: inputBuilder({
@@ -790,7 +808,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'focus'],
 		shortDescription: i18n.t('rotation_tab.apl.values.estimated_time_to_target_focus.tooltip'),
 		newValue: APLValueFocusTimeToTarget.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassHunter,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassHunter,
 		fields: [valueFieldConfig('targetFocus')],
 	}),
 	currentEnergy: inputBuilder({
@@ -798,10 +816,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'energy'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_energy.tooltip'),
 		newValue: APLValueCurrentEnergy.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk);
 		},
 		fields: [],
 	}),
@@ -810,10 +828,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'energy'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_energy.tooltip'),
 		newValue: APLValueMaxEnergy.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk);
 		},
 		fields: [],
 	}),
@@ -822,10 +840,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'energy'],
 		shortDescription: i18n.t('rotation_tab.apl.values.energy_regen_per_second.tooltip'),
 		newValue: APLValueEnergyRegenPerSecond.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk);
 		},
 		fields: [],
 	}),
@@ -834,10 +852,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'energy'],
 		shortDescription: i18n.t('rotation_tab.apl.values.estimated_time_to_target_energy.tooltip'),
 		newValue: APLValueEnergyTimeToTarget.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue || clss === Class.ClassMonk);
 		},
 		fields: [valueFieldConfig('targetEnergy')],
 	}),
@@ -846,10 +864,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'combo_points'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_combo_points.tooltip'),
 		newValue: APLValueCurrentComboPoints.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue);
 		},
 		fields: [],
 	}),
@@ -858,10 +876,10 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'combo_points'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_combo_points.tooltip'),
 		newValue: APLValueMaxComboPoints.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
-			return spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue;
+			return !isPrepull && (spec === Spec.SpecFeralDruid || spec === Spec.SpecGuardianDruid || clss === Class.ClassRogue);
 		},
 		fields: [],
 	}),
@@ -870,7 +888,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'chi'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_chi.tooltip'),
 		newValue: APLValueMonkCurrentChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() === Class.ClassMonk,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() === Class.ClassMonk,
 		fields: [],
 	}),
 	monkMaxChi: inputBuilder({
@@ -878,7 +896,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'chi'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_chi.tooltip'),
 		newValue: APLValueMonkMaxChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() === Class.ClassMonk,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() === Class.ClassMonk,
 		fields: [],
 	}),
 	currentRunicPower: inputBuilder({
@@ -886,7 +904,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runic_power'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_runic_power.tooltip'),
 		newValue: APLValueCurrentRunicPower.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [],
 	}),
 	maxRunicPower: inputBuilder({
@@ -894,7 +912,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runic_power'],
 		shortDescription: i18n.t('rotation_tab.apl.values.max_runic_power.tooltip'),
 		newValue: APLValueMaxRunicPower.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [],
 	}),
 	currentSolarEnergy: inputBuilder({
@@ -902,7 +920,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'eclipse'],
 		shortDescription: i18n.t('rotation_tab.apl.values.solar_energy.tooltip'),
 		newValue: APLValueCurrentSolarEnergy.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecBalanceDruid,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecBalanceDruid,
 		fields: [],
 	}),
 	currentLunarEnergy: inputBuilder({
@@ -910,7 +928,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'eclipse'],
 		shortDescription: i18n.t('rotation_tab.apl.values.lunar_energy.tooltip'),
 		newValue: APLValueCurrentLunarEnergy.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecBalanceDruid,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecBalanceDruid,
 		fields: [],
 	}),
 	druidCurrentEclipsePhase: inputBuilder({
@@ -918,7 +936,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'eclipse'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_eclipse_phase.tooltip'),
 		newValue: APLValueCurrentEclipsePhase.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecBalanceDruid,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecBalanceDruid,
 		fields: [AplHelpers.eclipseTypeFieldConfig('eclipsePhase')],
 	}),
 	currentGenericResource: inputBuilder({
@@ -926,7 +944,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources'],
 		shortDescription: i18n.t('rotation_tab.apl.values.generic_resource.tooltip'),
 		newValue: APLValueCurrentGenericResource.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => SecondaryResource.hasSecondaryResource(player.getSpec()),
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && SecondaryResource.hasSecondaryResource(player.getSpec()),
 		fields: [],
 		dynamicStringResolver: (value: string, player: Player<any>) => player.secondaryResource?.replaceResourceName(value) || '',
 	}),
@@ -937,7 +955,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.num_runes.tooltip'),
 		newValue: APLValueCurrentRuneCount.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', true)],
 	}),
 	currentNonDeathRuneCount: inputBuilder({
@@ -945,7 +963,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.num_non_death_runes.tooltip'),
 		newValue: APLValueCurrentNonDeathRuneCount.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	currentRuneActive: inputBuilder({
@@ -953,7 +971,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.rune_is_ready.tooltip'),
 		newValue: APLValueCurrentRuneActive.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
 	}),
 	currentRuneDeath: inputBuilder({
@@ -961,7 +979,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.rune_is_death.tooltip'),
 		newValue: APLValueCurrentRuneDeath.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
 	}),
 	runeCooldown: inputBuilder({
@@ -969,7 +987,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.rune_cooldown.tooltip'),
 		newValue: APLValueRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	nextRuneCooldown: inputBuilder({
@@ -977,7 +995,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.next_rune_cooldown.tooltip'),
 		newValue: APLValueNextRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeTypeFieldConfig('runeType', false)],
 	}),
 	runeSlotCooldown: inputBuilder({
@@ -985,7 +1003,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.rune_slot_cooldown.tooltip'),
 		newValue: APLValueRuneSlotCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.runeSlotFieldConfig('runeSlot')],
 	}),
 	fullRuneCooldown: inputBuilder({
@@ -993,7 +1011,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['resources', 'runes'],
 		shortDescription: i18n.t('rotation_tab.apl.values.full_rune_cooldown.tooltip'),
 		newValue: APLValueFullRuneCooldown.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassDeathKnight,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassDeathKnight,
 		fields: [AplHelpers.useRuneRegenBaseValueCheckbox()],
 	}),
 
@@ -1003,6 +1021,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['gcd'],
 		shortDescription: i18n.t('rotation_tab.apl.values.gcd_is_ready.tooltip'),
 		newValue: APLValueGCDIsReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	gcdTimeToReady: inputBuilder({
@@ -1010,6 +1029,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['gcd'],
 		shortDescription: i18n.t('rotation_tab.apl.values.gcd_time_to_ready.tooltip'),
 		newValue: APLValueGCDTimeToReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 
@@ -1019,10 +1039,11 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['auto'],
 		shortDescription: i18n.t('rotation_tab.apl.values.time_to_next_auto.tooltip'),
 		newValue: APLValueAutoTimeToNext.create,
-		includeIf(player: Player<any>, _isPrepull: boolean) {
+		includeIf(player: Player<any>, isPrepull: boolean) {
 			const clss = player.getClass();
 			const spec = player.getSpec();
 			return (
+				!isPrepull &&
 				clss !== Class.ClassHunter &&
 				clss !== Class.ClassMage &&
 				clss !== Class.ClassPriest &&
@@ -1040,6 +1061,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.spell_known.tooltip'),
 		newValue: APLValueSpellIsKnown.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCurrentCost: inputBuilder({
@@ -1047,6 +1069,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.current_cost.tooltip'),
 		newValue: APLValueSpellCurrentCost.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCanCast: inputBuilder({
@@ -1055,6 +1078,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		shortDescription: i18n.t('rotation_tab.apl.values.can_cast.tooltip'),
 		fullDescription: i18n.t('rotation_tab.apl.values.can_cast.full_description'),
 		newValue: APLValueSpellCanCast.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellIsReady: inputBuilder({
@@ -1062,6 +1086,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.is_ready.tooltip'),
 		newValue: APLValueSpellIsReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellTimeToReady: inputBuilder({
@@ -1069,6 +1094,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.time_to_ready.tooltip'),
 		newValue: APLValueSpellTimeToReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellCastTime: inputBuilder({
@@ -1090,6 +1116,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.cpm.tooltip'),
 		newValue: APLValueSpellCPM.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellIsChanneling: inputBuilder({
@@ -1097,6 +1124,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.is_channeling.tooltip'),
 		newValue: APLValueSpellIsChanneling.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'channel_spells', '')],
 	}),
 	spellChanneledTicks: inputBuilder({
@@ -1104,6 +1132,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.channeled_ticks.tooltip'),
 		newValue: APLValueSpellChanneledTicks.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'channel_spells', '')],
 	}),
 	spellNumCharges: inputBuilder({
@@ -1111,6 +1140,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.number_of_charges.tooltip'),
 		newValue: APLValueSpellNumCharges.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellTimeToCharge: inputBuilder({
@@ -1118,6 +1148,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.time_to_next_charge.tooltip'),
 		newValue: APLValueSpellTimeToCharge.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellGcdHastedDuration: inputBuilder({
@@ -1125,6 +1156,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.gcd_hasted_duration.tooltip'),
 		newValue: APLValueSpellGCDHastedDuration.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellFullCooldown: inputBuilder({
@@ -1132,6 +1164,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.full_cooldown.tooltip'),
 		newValue: APLValueSpellFullCooldown.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	channelClipDelay: inputBuilder({
@@ -1139,6 +1172,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.channel_clip_delay.tooltip'),
 		newValue: APLValueChannelClipDelay.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [],
 	}),
 	inputDelay: inputBuilder({
@@ -1153,6 +1187,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.spell_in_flight.tooltip'),
 		newValue: APLValueSpellInFlight.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'spells_with_travelTime', '')],
 	}),
 
@@ -1162,6 +1197,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_known.tooltip'),
 		newValue: APLValueAuraIsKnown.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraIsActive: inputBuilder({
@@ -1169,6 +1205,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_active.tooltip'),
 		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
@@ -1180,6 +1217,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_active_with_reaction_time.tooltip'),
 		newValue: () => APLValueAuraIsActive.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraIsInactive: inputBuilder({
@@ -1187,6 +1225,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_inactive.tooltip'),
 		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit'),
@@ -1198,6 +1237,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_inactive_with_reaction_time.tooltip'),
 		newValue: () => APLValueAuraIsInactive.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 	auraRemainingTime: inputBuilder({
@@ -1212,6 +1252,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_num_stacks.tooltip'),
 		newValue: () => APLValueAuraNumStacks.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'stackable_auras', 'sourceUnit'),
@@ -1223,6 +1264,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_remaining_icd.tooltip'),
 		newValue: APLValueAuraInternalCooldown.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraIcdIsReady: inputBuilder({
@@ -1230,6 +1272,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_icd_is_ready.tooltip'),
 		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'),
 			AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit'),
@@ -1241,6 +1284,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['aura'],
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_icd_is_ready_with_reaction_time.tooltip'),
 		newValue: () => APLValueAuraICDIsReady.create({ includeReactionTime: true }),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources'), AplHelpers.actionIdFieldConfig('auraId', 'icd_auras', 'sourceUnit')],
 	}),
 	auraShouldRefresh: inputBuilder({
@@ -1259,6 +1303,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 					},
 				},
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('sourceUnit', 'aura_sources_targets_first'),
 			AplHelpers.actionIdFieldConfig('auraId', 'exclusive_effect_auras', 'sourceUnit', 'currentTarget'),
@@ -1281,6 +1326,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1299,6 +1345,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1317,6 +1364,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1334,6 +1382,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1351,6 +1400,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1368,6 +1418,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.statTypeFieldConfig('statType1'),
 			AplHelpers.statTypeFieldConfig('statType2'),
@@ -1386,6 +1437,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 	anyStatBuffCooldownsActive: inputBuilder({
@@ -1399,6 +1451,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 	anyStatBuffCooldownsMinDuration: inputBuilder({
@@ -1412,6 +1465,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 				statType2: -1,
 				statType3: -1,
 			}),
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.statTypeFieldConfig('statType1'), AplHelpers.statTypeFieldConfig('statType2'), AplHelpers.statTypeFieldConfig('statType3')],
 	}),
 
@@ -1421,6 +1475,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_is_active.tooltip'),
 		newValue: APLValueDotIsActive.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotIsActiveOnAllTargets: inputBuilder({
@@ -1428,6 +1483,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_is_active_on_all_targets.tooltip'),
 		newValue: APLValueDotIsActiveOnAllTargets.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells')],
 	}),
 	dotRemainingTime: inputBuilder({
@@ -1435,6 +1491,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_remaining_time.tooltip'),
 		newValue: APLValueDotRemainingTime.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotLowestRemainingTime: inputBuilder({
@@ -1442,6 +1499,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_lowest_remaining_time.tooltip'),
 		newValue: APLValueDotLowestRemainingTime.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotTickFrequency: inputBuilder({
@@ -1449,6 +1507,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_tick_frequency.tooltip'),
 		newValue: APLValueDotTickFrequency.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotTimeToNextTick: inputBuilder({
@@ -1456,6 +1515,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_time_to_next_tick.tooltip'),
 		newValue: APLValueDotTimeToNextTick.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotBaseDuration: inputBuilder({
@@ -1463,6 +1523,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: 'The base duration of the DoT.',
 		newValue: APLValueDotBaseDuration.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.actionIdFieldConfig('spellId', 'dot_spells', '')],
 	}),
 	dotPercentIncrease: inputBuilder({
@@ -1470,6 +1531,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_percent_increase.tooltip'),
 		newValue: APLValueDotPercentIncrease.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
 			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
@@ -1481,6 +1543,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: "How much higher a new DoT's Critical Strike Chance would be compared to the old.",
 		newValue: APLValueDotPercentIncrease.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
 			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
@@ -1492,6 +1555,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['dot'],
 		shortDescription: 'How much faster a new DoT would tick compared to the old.',
 		newValue: APLValueDotPercentIncrease.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [
 			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
 			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
@@ -1503,6 +1567,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['sequence'],
 		shortDescription: i18n.t('rotation_tab.apl.values.sequence_is_complete.tooltip'),
 		newValue: APLValueSequenceIsComplete.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
 	}),
 	sequenceIsReady: inputBuilder({
@@ -1510,6 +1575,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['sequence'],
 		shortDescription: i18n.t('rotation_tab.apl.values.sequence_is_ready.tooltip'),
 		newValue: APLValueSequenceIsReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
 	}),
 	sequenceTimeToReady: inputBuilder({
@@ -1517,6 +1583,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['sequence'],
 		shortDescription: i18n.t('rotation_tab.apl.values.sequence_time_to_ready.tooltip'),
 		newValue: APLValueSequenceTimeToReady.create,
+		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [AplHelpers.stringFieldConfig('sequenceName')],
 	}),
 
@@ -1526,7 +1593,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['shaman'],
 		shortDescription: i18n.t('rotation_tab.apl.values.totem_remaining_time.tooltip'),
 		newValue: APLValueTotemRemainingTime.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassShaman,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassShaman,
 		fields: [totemTypeFieldConfig('totemType')],
 	}),
 	shamanFireElementalDuration: inputBuilder({
@@ -1534,7 +1601,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['shaman'],
 		shortDescription: i18n.t('rotation_tab.apl.values.shaman_fire_elemental_duration.tooltip'),
 		newValue: APLValueShamanFireElementalDuration.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getClass() == Class.ClassShaman,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getClass() == Class.ClassShaman,
 		fields: [],
 	}),
 	catExcessEnergy: inputBuilder({
@@ -1542,7 +1609,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['feral_druid'],
 		shortDescription: i18n.t('rotation_tab.apl.values.cat_excess_energy.tooltip'),
 		newValue: APLValueCatExcessEnergy.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFeralDruid,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecFeralDruid,
 		fields: [],
 	}),
 	catNewSavageRoarDuration: inputBuilder({
@@ -1550,7 +1617,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['feral_druid'],
 		shortDescription: i18n.t('rotation_tab.apl.values.cat_new_savage_roar_duration.tooltip'),
 		newValue: APLValueCatNewSavageRoarDuration.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFeralDruid,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecFeralDruid,
 		fields: [],
 	}),
 	warlockHandOfGuldanInFlight: inputBuilder({
@@ -1558,7 +1625,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['warlock'],
 		shortDescription: i18n.t('rotation_tab.apl.values.warlock_hand_of_guldan_in_flight.tooltip'),
 		newValue: APLValueWarlockHandOfGuldanInFlight.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecDemonologyWarlock,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecDemonologyWarlock,
 		fields: [],
 	}),
 	warlockHauntInFlight: inputBuilder({
@@ -1566,7 +1633,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['warlock'],
 		shortDescription: i18n.t('rotation_tab.apl.values.warlock_haunt_in_flight.tooltip'),
 		newValue: APLValueWarlockHauntInFlight.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecAfflictionWarlock,
 		fields: [],
 	}),
 	afflictionExhaleWindow: inputBuilder({
@@ -1574,7 +1641,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['warlock'],
 		shortDescription: i18n.t('rotation_tab.apl.values.affliction_exhale_window.tooltip'),
 		newValue: APLValueAfflictionExhaleWindow.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecAfflictionWarlock,
 		fields: [],
 	}),
 	afflictionCurrentSnapshot: inputBuilder({
@@ -1582,18 +1649,15 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['warlock'],
 		shortDescription: i18n.t('rotation_tab.apl.values.affliction_current_snapshot.tooltip'),
 		newValue: APLValueAfflictionCurrentSnapshot.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecAfflictionWarlock,
-		fields: [
-			AplHelpers.unitFieldConfig('targetUnit', 'targets'),
-			AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', ''),
-		],
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecAfflictionWarlock,
+		fields: [AplHelpers.unitFieldConfig('targetUnit', 'targets'), AplHelpers.actionIdFieldConfig('spellId', 'expected_dot_spells', '')],
 	}),
 	mageCurrentCombustionDotEstimate: inputBuilder({
 		label: i18n.t('rotation_tab.apl.values.mage_current_combustion_dot_estimate.label'),
 		submenu: ['mage'],
 		shortDescription: i18n.t('rotation_tab.apl.values.mage_current_combustion_dot_estimate.tooltip'),
 		newValue: APLValueMageCurrentCombustionDotEstimate.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() == Spec.SpecFireMage,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() == Spec.SpecFireMage,
 		fields: [],
 	}),
 	brewmasterMonkCurrentStaggerPercent: inputBuilder({
@@ -1601,7 +1665,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['tank'],
 		shortDescription: i18n.t('rotation_tab.apl.values.brewmaster_monk_current_stagger_percent.tooltip'),
 		newValue: APLValueMonkCurrentChi.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() === Spec.SpecBrewmasterMonk,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() === Spec.SpecBrewmasterMonk,
 		fields: [],
 	}),
 	protectionPaladinDamageTakenLastGlobal: inputBuilder({
@@ -1609,7 +1673,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		submenu: ['tank'],
 		shortDescription: i18n.t('rotation_tab.apl.values.protection_paladin_damage_taken_last_global.tooltip'),
 		newValue: APLValueProtectionPaladinDamageTakenLastGlobal.create,
-		includeIf: (player: Player<any>, _isPrepull: boolean) => player.getSpec() === Spec.SpecProtectionPaladin,
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && player.getSpec() === Spec.SpecProtectionPaladin,
 		fields: [],
 	}),
 
@@ -1640,7 +1704,7 @@ const valueKindFactories: { [f in ValidAPLValueKind]: ValueKindConfig<APLValueIm
 		label: 'Item Swap',
 		submenu: ['Misc'],
 		shortDescription: 'Returns <b>True</b> if the specified item swap set is currently active.',
-		includeIf: (player: Player<any>, _isPrepull: boolean) => itemSwapEnabledSpecs.includes(player.getSpec()),
+		includeIf: (player: Player<any>, isPrepull: boolean) => !isPrepull && itemSwapEnabledSpecs.includes(player.getSpec()),
 		newValue: APLValueActiveItemSwapSet.create,
 		fields: [AplHelpers.itemSwapSetFieldConfig('swapSet')],
 	}),
