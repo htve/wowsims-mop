@@ -219,6 +219,11 @@ export class BalanceDruidSimUI extends IndividualSimUI<Spec.SpecBalanceDruid> {
 				const gear = player.getGear();
 				const hasT144P = gear.getItemSetCount('Regalia of the Eternal Blossom') >= 4;
 				const hasUVLS = gear.getTrinkets().some(trinket => trinket?._item.name === 'Unerring Vision of Lei Shen');
+				const avgIlvl = player.getGear().getAverageItemLevel(false);
+
+				if (avgIlvl >= 525) {
+					softCaps = softCaps.slice(1);
+				}
 
 				if (hasT144P) {
 					const softCapToModify = softCaps.find(
