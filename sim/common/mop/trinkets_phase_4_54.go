@@ -797,4 +797,65 @@ func init() {
 			character.ItemSwap.RegisterProcWithSlots(itemID, statBuffTriggerAura, eligibleSlots)
 		})
 	})
+
+	// Black Blood of Y'Shaarj
+	// Your attacks have a chance to trigger Wrath of the Darkspear for 10 sec.
+	// While Wrath of the Darkspear is active, every 1 sec you gain 2805 Intellect, stacking up to 10 times.
+	// (Approximately 0.92 procs per minute)
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:             105150,
+		shared.ItemVersionNormal:          102310,
+		shared.ItemVersionHeroic:          104652,
+		shared.ItemVersionWarforged:       105399,
+		shared.ItemVersionHeroicWarforged: 105648,
+		shared.ItemVersionFlexible:        104901,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+
+			statBuffAura := core.MakeStackingAura(character, core.StackingStatAura{
+				Aura: core.Aura{
+					Label:     fmt.Sprintf("Wrath of the Darkspear (%s)", versionLabel),
+					ActionID:  core.ActionID{SpellID: 146184},
+					Duration:  time.Second * 10,
+					MaxStacks: 10,
+				},
+				BonusPerStack: stats.Stats{
+					stats.Intellect: core.GetItemEffectScaling(itemID, 0.59399998188, state),
+				},
+			})
+
+			statBuffTriggerAura := character.MakeProcTriggerAura(core.ProcTrigger{
+				Name:     fmt.Sprintf("Black Blood of Y'Shaarj (%s) - Stat Trigger", versionLabel),
+				Callback: core.CallbackOnSpellHitDealt,
+				Outcome:  core.OutcomeLanded,
+				ICD:      time.Second * 10,
+
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskDirect|core.ProcMaskProc, core.RPPMConfig{
+					PPM: 0.92000001669,
+				}),
+
+				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					statBuffAura.Activate(sim)
+					statBuffAura.SetStacks(sim, 1)
+					core.StartPeriodicAction(sim, core.PeriodicActionOptions{
+						Period:   time.Second,
+						NumTicks: 9,
+						OnAction: func(sim *core.Simulation) {
+							// Aura might not be active because of stuff like mage alter time being cast right before this aura being activated
+							if statBuffAura.IsActive() {
+								statBuffAura.AddStack(sim)
+							}
+						},
+					})
+				},
+			})
+
+			statBuffAura.Icd = statBuffTriggerAura.Icd
+
+			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
+			character.AddStatProcBuff(itemID, statBuffAura, false, eligibleSlots)
+			character.ItemSwap.RegisterProcWithSlots(itemID, statBuffTriggerAura, eligibleSlots)
+		})
+	})
 }
