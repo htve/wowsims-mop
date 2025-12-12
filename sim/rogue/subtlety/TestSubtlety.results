@@ -66,6 +66,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSubtlety-AllItems-BlackBloodofY'Shaarj-105648"
+ value: {
+  dps: 104634.4895
+  tps: 73772.78723
+ }
+}
+dps_results: {
  key: "TestSubtlety-AllItems-BurningPrimalDiamond"
  value: {
   dps: 104431.99541
@@ -416,6 +423,13 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestSubtlety-AllItems-Skeer'sBloodsoakedTalisman-105632"
+ value: {
+  dps: 109536.58248
+  tps: 77052.28187
+ }
+}
+dps_results: {
  key: "TestSubtlety-AllItems-SoothingTalismanoftheShado-PanAssault-94509"
  value: {
   dps: 100823.43931
@@ -469,6 +483,13 @@ dps_results: {
  value: {
   dps: 122974.25863
   tps: 86529.80634
+ }
+}
+dps_results: {
+ key: "TestSubtlety-AllItems-Time-LostArtifact-103678"
+ value: {
+  dps: 104865.47612
+  tps: 73880.52365
  }
 }
 dps_results: {
