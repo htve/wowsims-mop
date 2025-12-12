@@ -735,4 +735,66 @@ func init() {
 		character.AddStatProcBuff(103678, aura, false, eligibleSlots)
 		character.ItemSwap.RegisterProcWithSlots(103678, triggerAura, eligibleSlots)
 	})
+
+	// Skeer's Bloodsoaked Talisman
+	// Your melee attacks have a chance to trigger Cruelty for 10 sec.
+	// While Cruelty is active, you gain 1402 Critical Strike every 0.5 sec, stacking up to 20 times.
+	// (Approximately 0.92 procs per minute)
+	shared.ItemVersionMap{
+		shared.ItemVersionLFR:             105134,
+		shared.ItemVersionNormal:          102308,
+		shared.ItemVersionHeroic:          104636,
+		shared.ItemVersionWarforged:       105383,
+		shared.ItemVersionHeroicWarforged: 105632,
+		shared.ItemVersionFlexible:        104885,
+	}.RegisterAll(func(version shared.ItemVersion, itemID int32, versionLabel string) {
+		core.NewItemEffect(itemID, func(agent core.Agent, state proto.ItemLevelState) {
+			character := agent.GetCharacter()
+
+			statBuffAura := core.MakeStackingAura(character, core.StackingStatAura{
+				Aura: core.Aura{
+					Label:     fmt.Sprintf("Cruelty (%s)", versionLabel),
+					ActionID:  core.ActionID{SpellID: 146285},
+					Duration:  time.Second * 10,
+					MaxStacks: 20,
+				},
+				BonusPerStack: stats.Stats{
+					stats.CritRating: core.GetItemEffectScaling(itemID, 0.29699999094, state),
+				},
+			})
+
+			statBuffTriggerAura := character.MakeProcTriggerAura(core.ProcTrigger{
+				Name:               fmt.Sprintf("Skeer's Bloodsoaked Talisman (%s) - Stat Trigger", versionLabel),
+				Callback:           core.CallbackOnSpellHitDealt,
+				Outcome:            core.OutcomeLanded,
+				ICD:                time.Second * 10,
+				RequireDamageDealt: true,
+
+				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
+					PPM: 0.92000001669,
+				}),
+
+				Handler: func(sim *core.Simulation, spell *core.Spell, _ *core.SpellResult) {
+					statBuffAura.Activate(sim)
+					statBuffAura.SetStacks(sim, 1)
+					core.StartPeriodicAction(sim, core.PeriodicActionOptions{
+						Period:   time.Millisecond * 500,
+						NumTicks: 19,
+						OnAction: func(sim *core.Simulation) {
+							// Aura might not be active because of stuff like mage alter time being cast right before this aura being activated
+							if statBuffAura.IsActive() {
+								statBuffAura.AddStack(sim)
+							}
+						},
+					})
+				},
+			})
+
+			statBuffAura.Icd = statBuffTriggerAura.Icd
+
+			eligibleSlots := character.ItemSwap.EligibleSlotsForItem(itemID)
+			character.AddStatProcBuff(itemID, statBuffAura, false, eligibleSlots)
+			character.ItemSwap.RegisterProcWithSlots(itemID, statBuffTriggerAura, eligibleSlots)
+		})
+	})
 }
