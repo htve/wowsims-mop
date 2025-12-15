@@ -43,8 +43,6 @@ export interface LPModel {
 export interface SolverOptions {
 	/** Timeout in milliseconds */
 	timeout?: number;
-	/** Maximum iterations (not directly applicable to HiGHS, but kept for API compatibility) */
-	maxIterations?: number;
 	/** Solution tolerance */
 	tolerance?: number;
 }
@@ -52,13 +50,7 @@ export interface SolverOptions {
 /**
  * Solution status
  */
-export type SolutionStatus =
-	| 'optimal'
-	| 'infeasible'
-	| 'unbounded'
-	| 'timedout'
-	| 'error'
-	| 'unknown';
+export type SolutionStatus = 'optimal' | 'infeasible' | 'unbounded' | 'timedout' | 'error' | 'unknown';
 
 /**
  * LP Solution result - compatible with YALPS Solution type
@@ -108,10 +100,7 @@ export interface ReforgeWorkerReceiveMessageSolve extends ReforgeWorkerReceiveMe
 	options: SolverOptions;
 }
 
-export type ReforgeWorkerReceiveMessage =
-	| ReforgeWorkerReceiveMessageSetId
-	| ReforgeWorkerReceiveMessageInit
-	| ReforgeWorkerReceiveMessageSolve;
+export type ReforgeWorkerReceiveMessage = ReforgeWorkerReceiveMessageSetId | ReforgeWorkerReceiveMessageInit | ReforgeWorkerReceiveMessageSolve;
 
 /**
  * Worker send message types

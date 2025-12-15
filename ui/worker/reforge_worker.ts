@@ -4,11 +4,7 @@
  * Uses HiGHS WASM for high-performance linear programming solving
  */
 
-import type {
-	LPSolution,
-	ReforgeWorkerReceiveMessage,
-	ReforgeWorkerSendMessage,
-} from './reforge_types';
+import type { LPSolution, ReforgeWorkerReceiveMessage, ReforgeWorkerSendMessage } from './reforge_types';
 import { modelToLPFormat, highsSolutionToLPSolution, type HighsSolution } from './lp_format';
 
 // HiGHS module type
@@ -79,9 +75,7 @@ function postMsg(msg: ReforgeWorkerSendMessage) {
 /**
  * Solve LP problem using HiGHS
  */
-async function solveProblem(
-	msg: Extract<ReforgeWorkerReceiveMessage, { msg: 'solve' }>,
-): Promise<void> {
+async function solveProblem(msg: Extract<ReforgeWorkerReceiveMessage, { msg: 'solve' }>): Promise<void> {
 	const { id, model, options } = msg;
 
 	try {
@@ -106,7 +100,7 @@ async function solveProblem(
 		}
 
 		const highsSolution = highs.solve(lpString, highsOptions);
-		const solution = highsSolutionToLPSolution(highsSolution, reverseNameMap, 0.5);
+		const solution = highsSolutionToLPSolution(highsSolution, reverseNameMap, 0.001);
 
 		postMsg({
 			msg: 'solve',

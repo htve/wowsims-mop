@@ -1282,7 +1282,6 @@ export class ReforgeOptimizer {
 			reforgeSoftCaps,
 			variables,
 			constraints,
-			5000000,
 			(this.includeTimeout ? (this.relativeStatCap ? 120 : 30) : 3600) / (batchRun ? 4 : 1),
 		);
 		this.currentReforges = this.player.getGear().getAllReforges();
@@ -1694,7 +1693,6 @@ export class ReforgeOptimizer {
 		reforgeSoftCaps: StatCap[],
 		variables: YalpsVariables,
 		constraints: YalpsConstraints,
-		maxIterations: number,
 		maxSeconds: number,
 	): Promise<number> {
 		const updatedVariables = this.updateReforgeScores(variables, weights);
@@ -1712,14 +1710,13 @@ export class ReforgeOptimizer {
 		const workerPool = getReforgeWorkerPool();
 		const solution: LPSolution = await workerPool.solve(model, {
 			timeout: maxSeconds * 1000,
-			maxIterations: maxIterations,
-			tolerance: 0.01,
+			tolerance: 0.005,
 		});
 
 		const elapsedSeconds: number = (Date.now() - startTimeMs) / 1000;
 
-		if (isNaN(solution.result) || (solution.status == 'timedout' && maxIterations < 4000000 && elapsedSeconds < maxSeconds)) {
-			if (maxIterations > 4000000 || elapsedSeconds > maxSeconds) {
+		if (isNaN(solution.result) || (solution.status == 'timedout' && elapsedSeconds < maxSeconds)) {
+			if (elapsedSeconds > maxSeconds) {
 				if (solution.status == 'infeasible') {
 					throw 'The specified stat caps are impossible to achieve. Consider changing any upper bound stat caps to lower bounds instead.';
 				} else if (solution.status == 'timedout' && this.includeTimeout) {
@@ -1728,16 +1725,7 @@ export class ReforgeOptimizer {
 					throw solution.status;
 				}
 			} else {
-				return await this.solveModel(
-					gear,
-					weights,
-					reforgeCaps,
-					reforgeSoftCaps,
-					variables,
-					constraints,
-					maxIterations * 10,
-					maxSeconds - elapsedSeconds,
-				);
+				return await this.solveModel(gear, weights, reforgeCaps, reforgeSoftCaps, variables, constraints, maxSeconds - elapsedSeconds);
 			}
 		}
 
@@ -1767,7 +1755,6 @@ export class ReforgeOptimizer {
 				reforgeSoftCaps,
 				updatedVariables,
 				updatedConstraints,
-				maxIterations,
 				maxSeconds - elapsedSeconds,
 			);
 		}

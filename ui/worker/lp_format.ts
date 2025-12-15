@@ -38,11 +38,7 @@ function formatNumber(num: number): string {
 /**
  * Builds the objective function string (may be multiple lines if long)
  */
-function buildObjective(
-	variables: SerializedVariables,
-	objectiveKey: string,
-	variableNameMap: Map<string, string>,
-): string[] {
+function buildObjective(variables: SerializedVariables, objectiveKey: string, variableNameMap: Map<string, string>): string[] {
 	const terms: string[] = [];
 
 	for (const [varName, coefficients] of Object.entries(variables)) {
@@ -107,11 +103,7 @@ function wrapExpression(expression: string, maxLength: number): string[] {
 	return lines;
 }
 
-function buildConstraints(
-	variables: SerializedVariables,
-	constraints: SerializedConstraints,
-	variableNameMap: Map<string, string>,
-): string[] {
+function buildConstraints(variables: SerializedVariables, constraints: SerializedConstraints, variableNameMap: Map<string, string>): string[] {
 	const lines: string[] = [];
 	let constraintIndex = 0;
 
