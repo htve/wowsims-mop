@@ -1741,8 +1741,8 @@ export class ReforgeOptimizer {
 			}
 		}
 
-		// Apply the current solution
-		const updatedGear = await this.applyLPSolution(gear, solution);
+		// Build updated gear from solution (without UI update)
+		const updatedGear = this.buildGearFromSolution(gear, solution);
 
 		// Check if any unconstrained stats exceeded their specified cap.
 		// If so, add these stats to the constraint list and re-run the solver.
@@ -1757,9 +1757,9 @@ export class ReforgeOptimizer {
 		);
 
 		if (!anyCapsExceeded) {
+			await this.updateGear(updatedGear);
 			return solution.result;
 		} else {
-			await sleep(100);
 			return await this.solveModel(
 				updatedGear,
 				updatedWeights,
@@ -1803,7 +1803,7 @@ export class ReforgeOptimizer {
 		return updatedVariables;
 	}
 
-	async applyLPSolution(gear: Gear, solution: LPSolution): Promise<Gear> {
+	buildGearFromSolution(gear: Gear, solution: LPSolution): Gear {
 		let updatedGear = gear.withoutReforges(this.player.canDualWield2H(), this.frozenItemSlots);
 
 		if (this.includeGems) {
@@ -1836,6 +1836,11 @@ export class ReforgeOptimizer {
 			updatedGear = this.minimizeRegems(updatedGear);
 		}
 
+		return updatedGear;
+	}
+
+	async applyLPSolution(gear: Gear, solution: LPSolution): Promise<Gear> {
+		const updatedGear = this.buildGearFromSolution(gear, solution);
 		await this.updateGear(updatedGear);
 		return updatedGear;
 	}
