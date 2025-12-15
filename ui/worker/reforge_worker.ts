@@ -95,12 +95,13 @@ async function solveProblem(msg: Extract<ReforgeWorkerReceiveMessage, { msg: 'so
 		}
 
 		if (options.tolerance) {
-			highsOptions['mip_rel_gap'] = options.tolerance;
-			highsOptions['mip_abs_gap'] = options.tolerance;
+			// Leaving this as default for now, can adjust later if needed
+			//highsOptions['mip_rel_gap'] = options.tolerance;
+			//highsOptions['mip_abs_gap'] = options.tolerance;
 		}
 
 		const highsSolution = highs.solve(lpString, highsOptions);
-		const solution = highsSolutionToLPSolution(highsSolution, reverseNameMap, 0.001);
+		const solution = highsSolutionToLPSolution(highsSolution, reverseNameMap, 0.5);
 
 		postMsg({
 			msg: 'solve',
