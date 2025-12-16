@@ -14,9 +14,9 @@
 	{"action":{"castSpell":{"spellId":{"spellId":102560}}},"doAtValue":{"const":{"val":"-0.5s"}}}
 	],
 	"priorityList": [
-	{"action":{"groupReference":{"groupName":"UVLS DoTs"}}},
 	{"action":{"groupReference":{"groupName":"Cooldowns"}}},
 	{"action":{"groupReference":{"groupName":"Nature's Vigil"}}},
+	{"action":{"groupReference":{"groupName":"UVLS DoTs"}}},
 	{"action":{"groupReference":{"groupName":"Force of Nature"}}},
 	{"action":{"groupReference":{"groupName":"Astral Insight"}}},
 	{"action":{"groupReference":{"groupName":"Starfall"}}},
