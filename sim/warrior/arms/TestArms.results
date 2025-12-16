@@ -418,8 +418,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-AllItems-Skeer'sBloodsoakedTalisman-105632"
  value: {
-  dps: 240117.54071
-  tps: 164546.92192
+  dps: 241067.93044
+  tps: 164697.88329
  }
 }
 dps_results: {
@@ -474,8 +474,8 @@ dps_results: {
 dps_results: {
  key: "TestArms-AllItems-Time-LostArtifact-103678"
  value: {
-  dps: 227962.63071
-  tps: 157765.71857
+  dps: 227650.0035
+  tps: 157487.92004
  }
 }
 dps_results: {

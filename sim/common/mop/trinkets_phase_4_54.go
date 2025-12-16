@@ -708,13 +708,12 @@ func init() {
 		)
 
 		triggerAura := character.MakeProcTriggerAura(core.ProcTrigger{
-			Name:               "Time-Lost Artifact Trigger",
-			Callback:           core.CallbackOnSpellHitDealt,
-			Outcome:            core.OutcomeLanded,
-			ProcMask:           core.ProcMaskMeleeOrMeleeProc | core.ProcMaskRangedOrRangedProc,
-			ICD:                time.Second * 50,
-			ProcChance:         0.2,
-			RequireDamageDealt: true,
+			Name:       "Time-Lost Artifact Trigger",
+			Callback:   core.CallbackOnSpellHitDealt,
+			Outcome:    core.OutcomeLanded,
+			ProcMask:   core.ProcMaskMeleeOrMeleeProc | core.ProcMaskRangedOrRangedProc,
+			ICD:        time.Second * 50,
+			ProcChance: 0.2,
 
 			Handler: func(sim *core.Simulation, _ *core.Spell, _ *core.SpellResult) {
 				aura.Activate(sim)
@@ -759,11 +758,10 @@ func init() {
 			})
 
 			statBuffTriggerAura := character.MakeProcTriggerAura(core.ProcTrigger{
-				Name:               fmt.Sprintf("%s (%s) - Stat Trigger", label, versionLabel),
-				Callback:           core.CallbackOnSpellHitDealt,
-				Outcome:            core.OutcomeLanded,
-				ICD:                time.Second * 10,
-				RequireDamageDealt: true,
+				Name:     fmt.Sprintf("%s (%s) - Stat Trigger", label, versionLabel),
+				Callback: core.CallbackOnSpellHitDealt,
+				Outcome:  core.OutcomeLanded,
+				ICD:      time.Second * 10,
 
 				DPM: character.NewRPPMProcManager(itemID, false, false, core.ProcMaskMeleeOrMeleeProc, core.RPPMConfig{
 					PPM: 0.92000001669,

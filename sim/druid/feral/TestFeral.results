@@ -2177,9 +2177,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-Skeer'sBloodsoakedTalisman-105632"
  value: {
-  dps: 237746.76911
-  tps: 358568.30492
-  hps: 15745.16593
+  dps: 238330.17926
+  tps: 351795.98066
+  hps: 15615.71049
  }
 }
 dps_results: {
@@ -2441,9 +2441,9 @@ dps_results: {
 dps_results: {
  key: "TestFeral-AllItems-Time-LostArtifact-103678"
  value: {
-  dps: 227067.37041
-  tps: 309255.07812
-  hps: 14971.89667
+  dps: 227388.60666
+  tps: 314068.31854
+  hps: 14949.03056
  }
 }
 dps_results: {
