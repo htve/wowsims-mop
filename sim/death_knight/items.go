@@ -344,7 +344,7 @@ var ItemSetPlateOfCyclopeanDread = core.NewItemSet(core.ItemSet{
 				ClassSpellMask: DeathKnightSpellHeartStrike |
 					DeathKnightSpellRuneStrike |
 					DeathKnightSpellDeathCoil |
-					DeathKnightSpellSoulReaper |
+					DeathKnightSpellSoulReaperMelee |
 					DeathKnightSpellBloodBoil,
 
 				Handler: func(sim *core.Simulation, spell *core.Spell, result *core.SpellResult) {
