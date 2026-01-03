@@ -278,7 +278,7 @@ func ApplyVarianceMinMax(avgEffect float64, variance float64) (float64, float64)
 }
 
 func GetItemEffectScaling(itemID int32, coeff float64, state proto.ItemLevelState) float64 {
-	return math.Round(GetItemEffectRandomPropPointsForItem(itemID, state) * coeff)
+	return GetItemEffectRandomPropPointsForItem(itemID, state) * coeff
 }
 func GetItemEffectRandomPropPointsForItem(itemID int32, state proto.ItemLevelState) float64 {
 	return float64(GetItemByID(itemID).GetItemEffectRandomPropPoints(state))
