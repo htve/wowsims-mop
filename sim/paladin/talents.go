@@ -9,6 +9,9 @@ import (
 )
 
 func (paladin *Paladin) ApplyTalents() {
+	// Register Seal of Insight here to make the build phase stats show properly...
+	paladin.registerSealOfInsight()
+
 	if paladin.Level >= 15 {
 		paladin.registerSpeedOfLight()
 		paladin.registerLongArmOfTheLaw()
