@@ -70,8 +70,6 @@ func (prot *ProtectionPaladin) Initialize() {
 	})
 
 	prot.trackDamageTakenLastGlobal()
-
-	prot.registerHotfixPassive()
 }
 
 func (prot *ProtectionPaladin) trackDamageTakenLastGlobal() {
@@ -111,6 +109,7 @@ func (prot *ProtectionPaladin) trackDamageTakenLastGlobal() {
 func (prot *ProtectionPaladin) ApplyTalents() {
 	prot.Paladin.ApplyTalents()
 	prot.ApplyArmorSpecializationEffect(stats.Stamina, proto.ArmorType_ArmorTypePlate, 86525)
+	prot.registerHotfixPassive()
 }
 
 func (prot *ProtectionPaladin) Reset(sim *core.Simulation) {

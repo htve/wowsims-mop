@@ -104,7 +104,6 @@ func (paladin *Paladin) registerSpells() {
 	paladin.registerJudgment()
 	paladin.registerLayOnHands()
 	paladin.registerSanctityOfBattle()
-	paladin.registerSealOfInsight()
 	paladin.registerSealOfRighteousness()
 	paladin.registerSealOfTruth()
 	paladin.registerWordOfGlory()
