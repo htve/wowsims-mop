@@ -40,19 +40,8 @@ const languageMap = new Map<string, string>([
   ['zh', 'cn'],
 ]);
 
-function getBrowserLanguages(): string[] {
-  if (typeof navigator === 'undefined') {
-    return [];
-  }
-  if (Array.isArray(navigator.languages)) {
-    return navigator.languages;
-  }
-  const lang = (navigator as any).language || (navigator as any).browserLanguage || (navigator as any).userLanguage;
-  return lang ? [lang] : [];
-}
-
 function detectUserLanguage(defaultLang: string = 'en'): string {
-  const browserLangs = getBrowserLanguages();
+  const browserLangs = typeof navigator !== 'undefined' && navigator.language ? [navigator.language] : [];
   for (const lang of browserLangs) {
     const normalized = lang.toLowerCase();
     if (normalized in supportedLanguages) {
