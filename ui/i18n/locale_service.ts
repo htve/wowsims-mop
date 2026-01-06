@@ -27,45 +27,47 @@ export const setLang = (lang: string): string => {
 	return lang;
 };
 
-const languageAliases: Record<string, string> = {
-  'zh-CN': 'cn',
-  'zh': 'cn',
-  'en-US': 'en',
-  'en-GB': 'en',
-  'fr-FR': 'fr',
-  'fr-CA': 'fr',
-};
+const languageMap = new Map<string, string>([
+  ['en-US', 'en'],
+  ['en-GB', 'en'],
+  ['en-AU', 'en'],
+  ['en', 'en'],
+  ['fr-FR', 'fr'],
+  ['fr-CA', 'fr'],
+  ['fr', 'fr'],
+  ['zh-CN', 'cn'],
+  ['zh-Hans', 'cn'],
+  ['zh', 'cn'],
+]);
 
 function getBrowserLanguages(): string[] {
   if (typeof navigator === 'undefined') {
     return [];
   }
-  return 'languages' in navigator && Array.isArray((navigator as any).languages)
-    ? [...navigator.languages]
-    : [(navigator as any).language || 'en'];
+  if (Array.isArray(navigator.languages)) {
+    return navigator.languages;
+  }
+  const lang = (navigator as any).language || (navigator as any).browserLanguage || (navigator as any).userLanguage;
+  return lang ? [lang] : [];
 }
 
 function detectUserLanguage(defaultLang: string = 'en'): string {
   const browserLangs = getBrowserLanguages();
-  if (browserLangs.length === 0) {
-    return defaultLang;
-  }
   for (const lang of browserLangs) {
-    if (supportedLanguages.hasOwnProperty(lang)) {
-      return lang;
+    const normalized = lang.toLowerCase();
+    if (normalized in supportedLanguages) {
+      return normalized;
     }
-    const shortLang = lang.split('-')[0].toLowerCase();
-    if (supportedLanguages.hasOwnProperty(shortLang)) {
+    const shortLang = normalized.split('-')[0];
+    if (shortLang in supportedLanguages) {
       return shortLang;
     }
-    if (languageAliases.hasOwnProperty(lang) && supportedLanguages.hasOwnProperty(languageAliases[lang])) {
-      return languageAliases[lang];
-    }
-    if (languageAliases.hasOwnProperty(shortLang) && supportedLanguages.hasOwnProperty(languageAliases[shortLang])) {
-      return languageAliases[shortLang];
+    const mapped = languageMap.get(normalized) || languageMap.get(shortLang);
+    if (mapped && mapped in supportedLanguages) {
+      return mapped;
     }
   }
-  return defaultLang;
+  return defaultLang in supportedLanguages ? defaultLang : 'en';
 }
 
 // Add TypeScript interface for i18next on window
