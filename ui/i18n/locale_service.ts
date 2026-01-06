@@ -1,6 +1,8 @@
 // Locale service for WoWSims
 // Single source of truth for language settings
 
+import { getLangId as getWoWHeadLangId } from './wowhead_locale_service';
+
 const STORAGE_KEY = 'lang';
 
 export const supportedLanguages: Record<string, string> = {
@@ -20,20 +22,7 @@ export const getLang = (): string => {
 export const getLangId = (): number => {
 	const storedLang = localStorage.getItem(STORAGE_KEY);
 	if (storedLang && storedLang in supportedLanguages) {
-        // Map language codes to numeric Ids, refer to Wowhead locale Ids
-		switch(storedLang) {
-			case 'ko': return 1;
-			case 'fr': return 2;
-			case 'de': return 3;
-			case 'cn': return 4;
-			case 'es': return 6;
-			case 'ru': return 7;
-			case 'pt': return 8;
-			case 'it': return 9;
-			case 'tw': return 10;
-			case 'mx': return 11;
-			default: return 0;
-		};
+        return getWoWHeadLangId(storedLang);
 	}
 	return 0;
 };
