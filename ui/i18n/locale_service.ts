@@ -14,7 +14,7 @@ export const getLang = (): string => {
 	if (storedLang && storedLang in supportedLanguages) {
 		return storedLang;
 	}
-	return setLang('en');
+	return setLang(detectUserLanguage());
 };
 
 export const getLangId = (): number => {
@@ -48,6 +48,47 @@ export const setLang = (lang: string): string => {
 	}
 	return lang;
 };
+
+const languageAliases: Record<string, string> = {
+  'zh-CN': 'cn',
+  'zh': 'cn',
+  'en-US': 'en',
+  'en-GB': 'en',
+  'fr-FR': 'fr',
+  'fr-CA': 'fr',
+};
+
+function getBrowserLanguages(): string[] {
+  if (typeof navigator === 'undefined') {
+    return [];
+  }
+  return 'languages' in navigator && Array.isArray((navigator as any).languages)
+    ? [...navigator.languages]
+    : [(navigator as any).language || 'en'];
+}
+
+function detectUserLanguage(defaultLang: string = 'en'): string {
+  const browserLangs = getBrowserLanguages();
+  if (browserLangs.length === 0) {
+    return defaultLang;
+  }
+  for (const lang of browserLangs) {
+    if (supportedLanguages.hasOwnProperty(lang)) {
+      return lang;
+    }
+    const shortLang = lang.split('-')[0].toLowerCase();
+    if (supportedLanguages.hasOwnProperty(shortLang)) {
+      return shortLang;
+    }
+    if (languageAliases.hasOwnProperty(lang) && supportedLanguages.hasOwnProperty(languageAliases[lang])) {
+      return languageAliases[lang];
+    }
+    if (languageAliases.hasOwnProperty(shortLang) && supportedLanguages.hasOwnProperty(languageAliases[shortLang])) {
+      return languageAliases[shortLang];
+    }
+  }
+  return defaultLang;
+}
 
 // Add TypeScript interface for i18next on window
 declare global {
