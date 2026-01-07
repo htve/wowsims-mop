@@ -160,7 +160,7 @@ export function getWowheadLanguagePrefix(): string {
 }
 
 // Map language code to numeric Id
-export const getWowheadLanguageId = (lang: string): number => {
+export const getWowheadLanguageId = (lang: string = getLang()): number => {
 	const normalized = lang.toLowerCase();
 	return LANG_ID_MAP[normalized] ?? DEFAULT_LANG_ID;
 };

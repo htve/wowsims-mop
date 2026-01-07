@@ -18,14 +18,6 @@ export const getLang = (): string => {
 	return setLang('en');
 };
 
-export const getLangId = (): number => {
-	const storedLang = localStorage.getItem(STORAGE_KEY);
-	if (storedLang && storedLang in supportedLanguages) {
-        return getWowheadLanguageId(storedLang);
-	}
-	return 0;
-};
-
 export const setLang = (lang: string): string => {
 	if (lang in supportedLanguages) {
 		localStorage.setItem(STORAGE_KEY, lang);
