@@ -1,8 +1,6 @@
 // Locale service for WoWSims
 // Single source of truth for language settings
 
-import { getWowheadLanguageId } from '../core/wowhead';
-
 const STORAGE_KEY = 'lang';
 
 export const supportedLanguages: Record<string, string> = {
